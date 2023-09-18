@@ -46,7 +46,7 @@ const App = () => {
 
     setContacts(prevContacts => [...prevContacts, newContact]);
     setName('');
-    setNumber('');
+    setNumber(number);
     form.reset();
   };
 
