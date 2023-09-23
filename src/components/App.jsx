@@ -12,8 +12,6 @@ const App = () => {
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ]);
   const [filter, setFilter] = useState('');
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
 
   useEffect(() => {
     const storedContacts = JSON.parse(localStorage.getItem('contacts'));
@@ -26,15 +24,11 @@ const App = () => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    const form = evt.currentTarget;
-    const newName = form.elements.name.value;
-    const newNumber = form.elements.number.value;
+  const handleSubmit = (newName, newNumber) => {
     const existingContact = contacts.find(contact => contact.name === newName);
 
     if (existingContact) {
-      alert(`${name} is already in contacts.`);
+      alert(`${newName} is already in contacts.`);
       return;
     }
 
@@ -45,9 +39,6 @@ const App = () => {
     };
 
     setContacts(prevContacts => [...prevContacts, newContact]);
-    setName('');
-    setNumber(number);
-    form.reset();
   };
 
   const handleBrowser = evt => {
@@ -59,7 +50,6 @@ const App = () => {
     const button = evt.currentTarget;
     const name = button.name;
     const newContactsArr = contacts.filter(contact => contact.name !== name);
-
     setContacts(newContactsArr);
   };
 
